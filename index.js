@@ -9,7 +9,14 @@
 		canvas.setAttribute("height", "576");
 		canvas.innerHTML = "Upgrade browser boedjank";
 		document.querySelector("body").prepend(canvas);
-		var gl = canvas.getContext("webgl");
+
+		//Get WebGL Contexts
+		var contexts = ["webgl", "experimental-webgl", "webkit-3d", "moz-webgl"];
+		for (let i = 0; i < contexts.length; i++) {
+			var gl = canvas.getContext(contexts[i]);
+			if (gl)
+				break;
+		}
 
 		// Inisialisasi shaders dan program
 		var vertexShader = glUtils.getShader(gl, gl.VERTEX_SHADER, glUtils.SL.Shaders.v1.vertex);
